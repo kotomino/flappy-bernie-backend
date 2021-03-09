@@ -27,7 +27,7 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1
   def update
     if @game.update(game_params)
-      render json: @game
+      render json: @game, except: [:updated_at, :user_id], include: [:user]
     else
       render json: @game.errors, status: :unprocessable_entity
     end
