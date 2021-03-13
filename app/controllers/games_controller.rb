@@ -5,7 +5,7 @@ class GamesController < ApplicationController
   def index
     @games = Game.all
 
-    render json: @games, except: [:updated_at, :user_id], include: [:user]
+    render json: @games, except: [:created_at, :updated_at, :user_id], include: [:user]
   end
 
   # GET /games/1
@@ -18,7 +18,7 @@ class GamesController < ApplicationController
     @game = Game.new(game_params)
 
     if @game.save
-      render json: @game, status: :created, location: @game, except: [:updated_at, :user_id], include: [:user]
+      render json: @game, status: :created, location: @game, except: [:created_at, :updated_at, :user_id], include: [:user]
     else
       render json: @game.errors, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1
   def update
     if @game.update(game_params)
-      render json: @game, except: [:updated_at, :user_id], include: [:user]
+      render json: @game, except: [:created_at, :updated_at, :user_id], include: [:user]
     else
       render json: @game.errors, status: :unprocessable_entity
     end
